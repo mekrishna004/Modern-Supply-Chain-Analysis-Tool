@@ -1,0 +1,16 @@
+supplier,lead_time,reliability_score
+Supplier A,5,0.95
+Supplier B,7,0.88
+Supplier C,3,0.92
+Supplier D,10,0.85
+Supplier E,4,0.93
+Supplier F,8,0.87
+Supplier G,6,0.90
+Supplier H,12,0.82
+Supplier I,2,0.96
+Supplier J,9,0.84
+Supplier K,5,0.91
+Supplier L,11,0.83
+Supplier M,7,0.89
+Supplier N,4,0.94
+Supplier O,13,0.81
