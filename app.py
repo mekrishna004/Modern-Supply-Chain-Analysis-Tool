@@ -5,7 +5,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 from modules import abc_analysis, forecasting, risk_analysis, optimization
-import sqlite3
 import os
 
 # Page Configuration
@@ -70,18 +69,6 @@ if page == "Data Ingestion":
             except FileNotFoundError:
                 pass
 
-    # Database connection demo
-    st.subheader("Database Connection (Demo)")
-    db_path = st.text_input("SQLite DB path", "data/supply_chain.db")
-    if st.button("Connect to DB"):
-        try:
-            conn = sqlite3.connect(db_path)
-            tables = pd.read_sql("SELECT name FROM sqlite_master WHERE type='table';", conn)
-            st.write("Available tables:", tables['name'].tolist())
-            st.session_state.db_conn = conn
-        except Exception as e:
-            st.error(f"DB connection error: {e}")
-
 # ABC Analysis Page
 elif page == "ABC Analysis":
     st.header("🔤 ABC Analysis")
@@ -107,8 +94,6 @@ elif page == "Demand Forecasting":
         st.plotly_chart(forecast_results['chart'])
         st.subheader("Forecasted Values")
         st.dataframe(forecast_results['forecast'])
-        st.subheader("Model Summary")
-        st.text(forecast_results['model_summary'])
     else:
         st.warning("Please upload orders.csv first.")
 
