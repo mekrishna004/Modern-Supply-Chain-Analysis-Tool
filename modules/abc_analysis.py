@@ -32,8 +32,33 @@ def perform_abc(inventory_df):
         'item': 'count'
     }).rename(columns={'item': 'item_count'})
 
+    # Create Pareto chart with color differentiation by category
+    color_map = {
+        'A': '#00D084',  # Green for high-value items
+        'B': '#FF9F1C',  # Orange for medium-value items
+        'C': '#E74C3C'   # Red for low-value items
+    }
+    
+    pareto_chart = px.bar(
+        df, 
+        x='item', 
+        y='annual_value',
+        color='category',
+        color_discrete_map=color_map,
+        title="ABC Inventory Analysis - Pareto Chart",
+        labels={'item': 'Item', 'annual_value': 'Annual Value ($)', 'category': 'Category'},
+        hover_data={'cumulative_percentage': ':.1f', 'item': True, 'annual_value': ':$.0f'}
+    )
+    
+    pareto_chart.update_layout(
+        xaxis_tickangle=-45,
+        showlegend=True,
+        hovermode='x unified',
+        height=500
+    )
+
     return {
         'classified_inventory': df,
         'summary': summary,
-        'pareto_chart': px.bar(df, x='item', y='annual_value', title="Pareto Chart")
+        'pareto_chart': pareto_chart
     }
